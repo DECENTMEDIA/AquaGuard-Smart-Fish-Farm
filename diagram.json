@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "author": "AquaGuard",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 130, "left": 260, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": -130, "left": 240, "attrs": { "pins": "i2c" } },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "level",
+      "top": -65.7,
+      "left": 552.7,
+      "attrs": { "distance": "40" }
+    },
+    {
+      "type": "wokwi-ds18b20",
+      "id": "temp",
+      "top": 70,
+      "left": 560,
+      "attrs": { "temperature": "28" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "ph",
+      "top": 250,
+      "left": 550,
+      "attrs": { "value": "2048" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "turbidity",
+      "top": 370,
+      "left": 550,
+      "attrs": { "value": "1500" }
+    },
+    { "type": "wokwi-servo", "id": "inletServo", "top": 260, "left": -150, "attrs": {} },
+    { "type": "wokwi-servo", "id": "drainServo", "top": 390, "left": -150, "attrs": {} },
+    { "type": "wokwi-led", "id": "green", "top": -90, "left": -80, "attrs": { "color": "green" } },
+    {
+      "type": "wokwi-led",
+      "id": "yellow",
+      "top": -10,
+      "left": -80,
+      "attrs": { "color": "yellow" }
+    },
+    { "type": "wokwi-led", "id": "red", "top": 70, "left": -80, "attrs": { "color": "red" } },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 160, "left": -150, "attrs": {} },
+    { "type": "wokwi-resistor", "id": "rg", "top": -80, "left": 60, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "ry", "top": 0, "left": 60, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rr", "top": 80, "left": 60, "attrs": { "value": "220" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "pullup",
+      "top": 110,
+      "left": 470,
+      "attrs": { "value": "4700" }
+    }
+  ],
+  "connections": [
+    [ "lcd:VCC", "esp:5V", "red", [] ],
+    [ "lcd:GND", "esp:GND.1", "black", [] ],
+    [ "lcd:SDA", "esp:21", "green", [] ],
+    [ "lcd:SCL", "esp:22", "blue", [] ],
+    [ "level:VCC", "esp:5V", "red", [] ],
+    [ "level:GND", "esp:GND.1", "black", [] ],
+    [ "level:TRIG", "esp:18", "green", [] ],
+    [ "level:ECHO", "esp:19", "orange", [] ],
+    [ "temp:VCC", "esp:3V3", "red", [] ],
+    [ "temp:GND", "esp:GND.1", "black", [] ],
+    [ "temp:DQ", "esp:4", "green", [] ],
+    [ "temp:DQ", "pullup:1", "green", [] ],
+    [ "pullup:2", "esp:3V3", "red", [] ],
+    [ "ph:VCC", "esp:3V3", "red", [] ],
+    [ "ph:GND", "esp:GND.1", "black", [] ],
+    [ "ph:SIG", "esp:34", "orange", [] ],
+    [ "turbidity:VCC", "esp:3V3", "red", [] ],
+    [ "turbidity:GND", "esp:GND.1", "black", [] ],
+    [ "turbidity:SIG", "esp:35", "orange", [] ],
+    [ "inletServo:V+", "esp:5V", "red", [] ],
+    [ "inletServo:GND", "esp:GND.2", "black", [] ],
+    [ "inletServo:PWM", "esp:26", "orange", [] ],
+    [ "drainServo:V+", "esp:5V", "red", [] ],
+    [ "drainServo:GND", "esp:GND.2", "black", [] ],
+    [ "drainServo:PWM", "esp:27", "orange", [] ],
+    [ "esp:16", "rg:1", "green", [] ],
+    [ "rg:2", "green:A", "green", [] ],
+    [ "green:C", "esp:GND.2", "black", [] ],
+    [ "esp:17", "ry:1", "yellow", [] ],
+    [ "ry:2", "yellow:A", "yellow", [] ],
+    [ "yellow:C", "esp:GND.2", "black", [] ],
+    [ "esp:23", "rr:1", "red", [] ],
+    [ "rr:2", "red:A", "red", [] ],
+    [ "red:C", "esp:GND.2", "black", [] ],
+    [ "buzzer:1", "esp:25", "orange", [] ],
+    [ "buzzer:2", "esp:GND.2", "black", [] ]
+  ],
+  "dependencies": { "LiquidCrystal I2C": "*", "OneWire": "*", "DallasTemperature": "*", "ESP32Servo": "*" }
+}
